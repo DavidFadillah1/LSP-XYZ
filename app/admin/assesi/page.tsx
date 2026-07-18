@@ -246,7 +246,7 @@ export default function DaftarAssesi() {
                         <table className="table table-bordered grocery-crud-table table-hover">
                           <thead>
                             <tr className="bg-gray">
-                              <th width="140px">Pilihan</th>
+                              <th style={{ width: '140px' }}>Pilihan</th>
                               <th>Sertifikasi Event ID</th>
                               <th>ID</th>
                               <th>No Peserta</th>
