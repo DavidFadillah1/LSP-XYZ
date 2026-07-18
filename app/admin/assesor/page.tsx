@@ -149,7 +149,7 @@ export default function DaftarAssesor() {
                   <table className="table table-bordered table-striped">
                     <thead>
                       <tr className="bg-gray">
-                        <th width="10%">Pilihan</th>
+                        <th style={{ width: '10%' }}>Pilihan</th>
                         <th>Nama Assesor</th>
                         <th>Berlaku</th>
                         <th>Email</th>

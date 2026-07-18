@@ -285,11 +285,11 @@ export default function KelolaUsers() {
                       <table className="table table-bordered table-striped table-hover">
                         <thead>
                           <tr className="bg-gray">
-                            <th width="5%">No</th>
+                            <th style={{ width: '5%' }}>No</th>
                             <th>Email / Username</th>
-                            <th width="15%">Role</th>
-                            <th width="20%">Tgl Daftar</th>
-                            <th width="10%">Aksi</th>
+                            <th style={{ width: '15%' }}>Role</th>
+                            <th style={{ width: '20%' }}>Tgl Daftar</th>
+                            <th style={{ width: '10%' }}>Aksi</th>
                           </tr>
                         </thead>
                         <tbody>

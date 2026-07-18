@@ -323,11 +323,11 @@ export default function KelolaSkema() {
                         <table className="table table-bordered grocery-crud-table table-hover">
                           <thead>
                             <tr>
-                              <th width="15%">Pilihan</th>
-                              <th width="25%">Nomor Skema</th>
-                              <th width="30%">Judul Skema</th>
-                              <th width="15%">Jenis Skema</th>
-                              <th width="15%">Sektor</th>
+                              <th style={{ width: '15%' }}>Pilihan</th>
+                              <th style={{ width: '25%' }}>Nomor Skema</th>
+                              <th style={{ width: '30%' }}>Judul Skema</th>
+                              <th style={{ width: '15%' }}>Jenis Skema</th>
+                              <th style={{ width: '15%' }}>Sektor</th>
                             </tr>
                           </thead>
                           <tbody>

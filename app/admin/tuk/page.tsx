@@ -201,7 +201,7 @@ export default function KelolaTUK() {
                   <span className="pull-right-container"><i className="fa fa-angle-left pull-right"></i></span>
                 </a>
                 <ul className="treeview-menu" style={{ display: openMenu === 'assesi' ? 'block' : 'none' }}>
-                  <li><Link href="#"><i className="fa fa-circle-o"></i> Assesi</Link></li>
+                  <li><Link href="/admin/assesi"><i className="fa fa-circle-o"></i> Assesi</Link></li>
                 </ul>
               </li>
 
@@ -312,11 +312,11 @@ export default function KelolaTUK() {
                         <table className="table table-bordered grocery-crud-table table-hover">
                           <thead>
                             <tr>
-                              <th width="15%">Pilihan</th>
-                              <th width="15%">Kode TUK</th>
-                              <th width="25%">Nama TUK</th>
-                              <th width="30%">Alamat</th>
-                              <th width="15%">Jenis TUK</th>
+                              <th style={{ width: '15%' }}>Pilihan</th>
+                              <th style={{ width: '15%' }}>Kode TUK</th>
+                              <th style={{ width: '25%' }}>Nama TUK</th>
+                              <th style={{ width: '30%' }}>Alamat</th>
+                              <th style={{ width: '15%' }}>Jenis TUK</th>
                             </tr>
                           </thead>
                           <tbody>
