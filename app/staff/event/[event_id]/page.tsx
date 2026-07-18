@@ -136,7 +136,7 @@ export default function DetailEventStaff() {
                       <table className="table table-bordered" style={{ marginBottom: 0 }}>
                         <tbody>
                           <tr>
-                            <th width="20%">Tanggal</th>
+                            <th style={{ width: '20%' }}>Tanggal</th>
                             <td>{formatTanggal(eventDetail.tanggal_mulai, eventDetail.tanggal_selesai)}</td>
                           </tr>
                           <tr>
@@ -211,11 +211,11 @@ export default function DetailEventStaff() {
                         <table className="table table-striped table-bordered">
                           <thead>
                             <tr className="bg-gray">
-                              <th width="3%">No.</th>
-                              <th width="20%">No-Nama Peserta</th>
-                              <th width="20%">Email-HP Peserta</th>
-                              <th width="5%">Status</th>
-                              <th width="52%">Form</th>
+                              <th style={{ width: '3%' }}>No.</th>
+                              <th style={{ width: '20%' }}>No-Nama Peserta</th>
+                              <th style={{ width: '20%' }}>Email-HP Peserta</th>
+                              <th style={{ width: '5%' }}>Status</th>
+                              <th style={{ width: '52%' }}>Form</th>
                             </tr>
                           </thead>
                           <tbody>

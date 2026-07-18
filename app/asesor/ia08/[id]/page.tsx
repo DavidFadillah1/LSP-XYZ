@@ -127,8 +127,8 @@ export default function IA08Page() {
                     <td colSpan={3}>Sebagai tindak lanjut dari hasil verifikasi bukti, substansi materi di bawah ini (no elemen yg di cek list) harus diklarifikasi selama wawancara:</td>
                   </tr>
                   <tr>
-                    <th className="text-center" width="10%">Checked</th>
-                    <th width="30%">No.Elemen</th>
+                    <th className="text-center" style={{ width: '10%' }}>Checked</th>
+                    <th style={{ width: '30%' }}>No.Elemen</th>
                     <th>Materi/substansi Wawancara (KUK)</th>
                   </tr>
                 </thead>

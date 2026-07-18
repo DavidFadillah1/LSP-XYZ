@@ -228,10 +228,10 @@ export default function AssesiDashboard() {
                     <table className="table table-bordered">
                       <thead>
                         <tr className="bg-gray">
-                          <th width="5%">No.</th>
+                          <th style={{ width: '5%' }}>No.</th>
                           <th>Daftar Cek</th>
-                          <th width="10%" className="text-center">Memenuhi</th>
-                          <th width="20%">Bukti (Screenshot)</th>
+                          <th style={{ width: '10%' }} className="text-center">Memenuhi</th>
+                          <th style={{ width: '20%' }}>Bukti (Screenshot)</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -458,7 +458,7 @@ export default function AssesiDashboard() {
                         <table className="table table-bordered">
                           <thead>
                             <tr className="bg-gray">
-                              <th width="15%" className="text-center">Status</th>
+                              <th style={{ width: '15%' }} className="text-center">Status</th>
                               <th>Langkah Wajib Peserta</th>
                             </tr>
                           </thead>

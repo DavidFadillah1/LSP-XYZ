@@ -233,8 +233,8 @@ export default function APL02AsesiPage() {
                         <thead>
                           <tr className="bg-gray">
                             <th>Bukti Portfolio yg relevan <button type="button" onClick={handleTambahBukti} className="btn btn-primary btn-sm ml-2">Tambah</button></th>
-                            <th width="35%">Keterangan</th>
-                            <th width="10%">Aksi</th>
+                            <th style={{ width: '35%' }}>Keterangan</th>
+                            <th style={{ width: '10%' }}>Aksi</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -280,11 +280,11 @@ export default function APL02AsesiPage() {
                     <tr className="bg-gray">
                       <th rowSpan={2} style={{verticalAlign:"middle"}}>Dapatkah saya ...?</th>
                       <th colSpan={2} className="text-center">Penilaian</th>
-                      <th rowSpan={2} width="25%" style={{verticalAlign:"middle"}}>Bukti-Bukti Kompetensi</th>
+                      <th rowSpan={2} style={{ width: '25%', verticalAlign:"middle" }}>Bukti-Bukti Kompetensi</th>
                     </tr>
                     <tr className="bg-gray">
-                      <th width="80px" className="text-center">K</th>
-                      <th width="80px" className="text-center">BK</th>
+                      <th style={{ width: '80px' }} className="text-center">K</th>
+                      <th style={{ width: '80px' }} className="text-center">BK</th>
                     </tr>
                   </thead>
                   <tbody>

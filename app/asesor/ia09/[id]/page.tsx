@@ -126,10 +126,10 @@ export default function IA09Page() {
               <table className="table table-bordered">
                 <thead>
                   <tr className="bg-gray text-center">
-                    <th width="40%">Daftar Pertanyaan Wawancara (Dari IA.08)</th>
-                    <th width="40%">Kesimpulan Jawaban Assesi</th>
-                    <th width="10%">K</th>
-                    <th width="10%">BK</th>
+                    <th style={{ width: '40%' }}>Daftar Pertanyaan Wawancara (Dari IA.08)</th>
+                    <th style={{ width: '40%' }}>Kesimpulan Jawaban Assesi</th>
+                    <th style={{ width: '10%' }}>K</th>
+                    <th style={{ width: '10%' }}>BK</th>
                   </tr>
                 </thead>
                 <tbody>

@@ -152,7 +152,7 @@ export default function AK02Page() {
               
               <table className="table table-bordered">
                 <tbody>
-                  <tr><th width="30%">Nama Peserta</th><td>: {pesertaInfo?.nama || "Loading..."}</td></tr>
+                  <tr><th style={{ width: '30%' }}>Nama Peserta</th><td>: {pesertaInfo?.nama || "Loading..."}</td></tr>
                   <tr><th>Nama Assesor</th><td>: {currentUser?.nama}</td></tr>
                   <tr><th>Skema Sertifikasi</th><td>: {pesertaInfo?.skema || "Loading..."}</td></tr>
                   <tr><th>Tanggal Mulai/Selesai</th><td>: {pesertaInfo?.tanggal}</td></tr>

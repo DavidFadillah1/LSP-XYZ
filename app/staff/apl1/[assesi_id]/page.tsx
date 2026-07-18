@@ -232,7 +232,7 @@ export default function APL01StaffPage() {
                   <div className="col-md-12">
                     <table className="table table-bordered">
                       <thead>
-                        <tr><th width="30%">Skema Sertifikasi</th><th width="10%">Judul</th><th width="2%">:</th><th>{skemaDetail?.judul_skema || "-"}</th></tr>
+                        <tr><th style={{ width: '30%' }}>Skema Sertifikasi</th><th style={{ width: '10%' }}>Judul</th><th style={{ width: '2%' }}>:</th><th>{skemaDetail?.judul_skema || "-"}</th></tr>
                         <tr><th>Jenis: Klaster</th><th>Nomor</th><th>:</th><th>{skemaDetail?.kode_skema || "-"}</th></tr>
                       </thead>
                     </table>
@@ -247,9 +247,9 @@ export default function APL01StaffPage() {
                       <table className="table table-bordered table-striped">
                         <thead>
                           <tr className="bg-gray">
-                            <th width="5%">No.</th>
-                            <th width="75%">Bukti Persyaratan</th>
-                            <th width="20%">Status</th>
+                            <th style={{ width: '5%' }}>No.</th>
+                            <th style={{ width: '75%' }}>Bukti Persyaratan</th>
+                            <th style={{ width: '20%' }}>Status</th>
                           </tr>
                         </thead>
                         <tbody>

@@ -176,6 +176,10 @@ export default function AssesorDashboard() {
     }
   };
 
+  const handleCatatanChange = (id: string, value: string) => {
+    setCatatan(prev => ({ ...prev, [id]: value }));
+  };
+
   const handlePlaceholder = (e: React.MouseEvent, namaFitur: string) => {
     e.preventDefault();
     const Swal = (window as any).Swal;
@@ -346,13 +350,13 @@ export default function AssesorDashboard() {
                           <table className="table table-striped table-bordered">
                             <thead>
                               <tr className="bg-gray">
-                                <th width="8%">ID</th>
-                                <th width="10%">Tanggal event</th>
-                                <th width="15%">Nama event</th>
-                                <th width="15%">TUK</th>
-                                <th width="10%">Type Event</th>
-                                <th width="20%">SKEMA Assesor</th>
-                                <th width="22%">Aksi</th>
+                                <th style={{ width: '8%' }}>ID</th>
+                                <th style={{ width: '10%' }}>Tanggal event</th>
+                                <th style={{ width: '15%' }}>Nama event</th>
+                                <th style={{ width: '15%' }}>TUK</th>
+                                <th style={{ width: '10%' }}>Type Event</th>
+                                <th style={{ width: '20%' }}>SKEMA Assesor</th>
+                                <th style={{ width: '22%' }}>Aksi</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -385,13 +389,13 @@ export default function AssesorDashboard() {
                           <table className="table table-striped table-bordered">
                             <thead>
                               <tr className="bg-gray">
-                                <th width="8%">ID</th>
-                                <th width="10%">Tanggal event</th>
-                                <th width="15%">Nama event</th>
-                                <th width="15%">TUK</th>
-                                <th width="10%">Type Event</th>
-                                <th width="20%">SKEMA Assesor</th>
-                                <th width="22%">Aksi</th>
+                                <th style={{ width: '8%' }}>ID</th>
+                                <th style={{ width: '10%' }}>Tanggal event</th>
+                                <th style={{ width: '15%' }}>Nama event</th>
+                                <th style={{ width: '15%' }}>TUK</th>
+                                <th style={{ width: '10%' }}>Type Event</th>
+                                <th style={{ width: '20%' }}>SKEMA Assesor</th>
+                                <th style={{ width: '22%' }}>Aksi</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -441,13 +445,13 @@ export default function AssesorDashboard() {
                       <table className="table table-striped table-bordered">
                         <thead>
                           <tr className="bg-gray">
-                            <th width="3%">No.</th>
-                            <th width="15%">No Peserta/Phone</th>
-                            <th width="20%">Nama/Email Peserta</th>
-                            <th width="5%" className="text-center">Status</th>
-                            <th width="10%" className="text-center">Assesment</th>
-                            <th width="15%">Catatan</th>
-                            <th width="32%">Form (Aksi Assesi)</th> 
+                            <th style={{ width: '3%' }}>No.</th>
+                            <th style={{ width: '15%' }}>No Peserta/Phone</th>
+                            <th style={{ width: '20%' }}>Nama/Email Peserta</th>
+                            <th style={{ width: '5%' }} className="text-center">Status</th>
+                            <th style={{ width: '10%' }} className="text-center">Assesment</th>
+                            <th style={{ width: '15%' }}>Catatan</th>
+                            <th style={{ width: '32%' }}>Form (Aksi Assesi)</th> 
                           </tr>
                         </thead>
                         <tbody>
