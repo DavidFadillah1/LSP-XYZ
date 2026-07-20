@@ -18,7 +18,6 @@ export default function DaftarAssesi() {
   const fetchAssesi = async () => {
     setFetchingAssesi(true);
     try {
-      // Mengambil data dari tabel 'assesi'
       const { data, error } = await supabase
         .from("assesi")
         .select("*")
@@ -72,6 +71,72 @@ export default function DaftarAssesi() {
       (assesi.no_peserta && assesi.no_peserta.toLowerCase().includes(term))
     );
   });
+
+  // FUNGSI EXPORT KE EXCEL (CSV KHUSUS REGION INDONESIA)
+  const handleExportExcel = (e: React.MouseEvent) => {
+    e.preventDefault();
+    
+    if (filteredAssesiList.length === 0) {
+      alert("Tidak ada data untuk diekspor.");
+      return;
+    }
+
+    const headers = [
+      "Sertifikasi Event ID", "ID", "No Peserta", "Nama Peserta", "Email", 
+      "Status APL.01", "Status Kompetensi", "Hasil Asesmen (Raw)", "Skema Sertifikasi ID", "Assesor ID", 
+      "User ID", "No Blanko", "No Sertifikat", "No Registrasi", 
+      "Tanggal Berlaku", "Tanggal Expired"
+    ];
+
+    const csvRows = [];
+    csvRows.push(headers.join(";"));
+
+    filteredAssesiList.forEach(assesi => {
+      let statusApl1 = "Belum Diperiksa";
+      if (assesi.rekomendasi_apl1 === 'D') statusApl1 = "Diterima";
+      if (assesi.rekomendasi_apl1 === 'TD') statusApl1 = "Ditolak";
+
+      let statusKompetensi = "Menunggu";
+      const hasilAsesmen = assesi.hasil_asesmen ? assesi.hasil_asesmen.toLowerCase() : '';
+      if (hasilAsesmen === 'k' || hasilAsesmen === 'kompeten') statusKompetensi = "Kompeten (K)";
+      if (hasilAsesmen === 'bk' || hasilAsesmen === 'belum kompeten') statusKompetensi = "Belum Kompeten (BK)";
+
+      const row = [
+        assesi.sertifikasi_event_id || "-",
+        assesi.id || "-",
+        assesi.no_peserta || "-",
+        assesi.nama_peserta || "-",
+        assesi.email || "-",
+        statusApl1,
+        statusKompetensi,
+        assesi.hasil_asesmen || "-", // Nilai RAW
+        assesi.skema_sertifikasi_id || "-",
+        assesi.assesor_id || "-",
+        assesi.user_id || "-",
+        assesi.no_blanko || "-",
+        assesi.no_sertifikat || "-",
+        assesi.no_registrasi || "-",
+        assesi.tanggal_berlaku ? new Date(assesi.tanggal_berlaku).toLocaleDateString('id-ID') : "-",
+        assesi.tanggal_expired ? new Date(assesi.tanggal_expired).toLocaleDateString('id-ID') : "-"
+      ];
+
+      const escapedRow = row.map(cell => `"${String(cell).replace(/"/g, '""')}"`);
+      csvRows.push(escapedRow.join(";"));
+    });
+
+    const BOM = "\uFEFF";
+    const csvContent = BOM + csvRows.join("\n");
+    
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", `Data_Assesi_LSP_${new Date().toISOString().split('T')[0]}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <div suppressHydrationWarning className={`skin-blue ${!isSidebarOpen ? 'sidebar-collapse' : ''}`} style={{ height: "auto", minHeight: "100vh" }}>
@@ -163,7 +228,6 @@ export default function DaftarAssesi() {
                   <span className="pull-right-container"><i className="fa fa-angle-left pull-right"></i></span>
                 </a>
                 <ul className="treeview-menu" style={{ display: openMenu === 'assesi' ? 'block' : 'none' }}>
-                  {/* LINK ASSESI DIPERBAIKI DI SINI */}
                   <li className="active"><Link href="/admin/assesi"><i className="fa fa-circle-o"></i> Assesi</Link></li>
                 </ul>
               </li>
@@ -220,7 +284,7 @@ export default function DaftarAssesi() {
                         </div>
                         
                         <div className="floatR" style={{ display: 'flex', gap: '10px' }}>
-                          <a className="btn btn-default t5 gc-export" href="#">
+                          <a className="btn btn-default t5 gc-export" href="#" onClick={handleExportExcel}>
                             <i className="fa fa-cloud-download floatL t3"></i>
                             <span className="hidden-xs floatL l5">Ekspor</span>
                           </a>
@@ -252,6 +316,8 @@ export default function DaftarAssesi() {
                               <th>No Peserta</th>
                               <th>Nama Peserta</th>
                               <th>Email</th>
+                              <th className="text-center">Status APL.01</th>
+                              <th className="text-center">Status Kompetensi</th>
                               <th>Skema Sertifikasi ID</th>
                               <th>Assesor ID</th>
                               <th>User ID</th>
@@ -264,50 +330,69 @@ export default function DaftarAssesi() {
                           </thead>
                           <tbody>
                             {fetchingAssesi ? (
-                              <tr><td colSpan={14} className="text-center">Memuat data...</td></tr>
+                              <tr><td colSpan={16} className="text-center">Memuat data...</td></tr>
                             ) : filteredAssesiList.length === 0 ? (
-                              <tr><td colSpan={14} className="text-center text-muted">
+                              <tr><td colSpan={16} className="text-center text-muted">
                                 {searchTerm ? `Tidak ditemukan hasil untuk "${searchTerm}"` : "Belum ada data Assesi (atau tabel 'assesi' belum dibuat)."}
                               </td></tr>
                             ) : (
-                              filteredAssesiList.map((assesi) => (
-                                <tr key={assesi.id}>
-                                  <td>
-                                    <div className="btn-group-custom">
-                                      <Link href={`#`} className="btn btn-default btn-sm" title="Ubah">
-                                        <i className="fa fa-pencil"></i>
-                                      </Link>
-                                      <Link href={`#`} className="btn btn-info btn-sm" title="Dokumen">
-                                        <i className="fa fa-image"></i>
-                                      </Link>
-                                      <Link href={`#`} className="btn btn-success btn-sm" title="View">
-                                        <i className="fa fa-eye"></i>
-                                      </Link>
-                                      <button 
-                                        className="btn btn-danger btn-sm" 
-                                        title="Hapus"
-                                        onClick={() => handleDeleteAssesi(assesi.id, assesi.nama_peserta)}
-                                      >
-                                        <i className="fa fa-trash-o"></i>
-                                      </button>
-                                    </div>
-                                  </td>
-                                  
-                                  <td>{assesi.sertifikasi_event_id || '-'}</td>
-                                  <td>{assesi.id}</td>
-                                  <td><strong>{assesi.no_peserta || '-'}</strong></td>
-                                  <td>{assesi.nama_peserta || '-'}</td>
-                                  <td>{assesi.email || '-'}</td>
-                                  <td>{assesi.skema_sertifikasi_id || '-'}</td>
-                                  <td>{assesi.assesor_id || '-'}</td>
-                                  <td>{assesi.user_id || '-'}</td>
-                                  <td>{assesi.no_blanko || '-'}</td>
-                                  <td>{assesi.no_sertifikat || '-'}</td>
-                                  <td>{assesi.no_registrasi || '-'}</td>
-                                  <td>{assesi.tanggal_berlaku ? new Date(assesi.tanggal_berlaku).toLocaleDateString('id-ID') : '-'}</td>
-                                  <td>{assesi.tanggal_expired ? new Date(assesi.tanggal_expired).toLocaleDateString('id-ID') : '-'}</td>
-                                </tr>
-                              ))
+                              filteredAssesiList.map((assesi) => {
+                                let badgeApl1 = <span className="label label-default">Belum Diperiksa</span>;
+                                if (assesi.rekomendasi_apl1 === 'D') badgeApl1 = <span className="label label-success">Diterima</span>;
+                                if (assesi.rekomendasi_apl1 === 'TD') badgeApl1 = <span className="label label-danger">Ditolak</span>;
+
+                                let badgeKompetensi = <span className="label label-warning">Menunggu</span>;
+                                const hasilAsesmen = assesi.hasil_asesmen ? assesi.hasil_asesmen.toLowerCase() : '';
+
+                                if (hasilAsesmen === 'k' || hasilAsesmen === 'kompeten') {
+                                  badgeKompetensi = <span className="label label-success">Kompeten (K)</span>;
+                                } else if (hasilAsesmen === 'bk' || hasilAsesmen === 'belum kompeten') {
+                                  badgeKompetensi = <span className="label label-danger">Belum Kompeten (BK)</span>;
+                                }
+
+                                return (
+                                  <tr key={assesi.id}>
+                                    <td>
+                                      <div className="btn-group-custom">
+                                        <Link href={`#`} className="btn btn-default btn-sm" title="Ubah">
+                                          <i className="fa fa-pencil"></i>
+                                        </Link>
+                                        <Link href={`#`} className="btn btn-info btn-sm" title="Dokumen">
+                                          <i className="fa fa-image"></i>
+                                        </Link>
+                                        <Link href={`#`} className="btn btn-success btn-sm" title="View">
+                                          <i className="fa fa-eye"></i>
+                                        </Link>
+                                        <button 
+                                          className="btn btn-danger btn-sm" 
+                                          title="Hapus"
+                                          onClick={() => handleDeleteAssesi(assesi.id, assesi.nama_peserta)}
+                                        >
+                                          <i className="fa fa-trash-o"></i>
+                                        </button>
+                                      </div>
+                                    </td>
+                                    
+                                    <td>{assesi.sertifikasi_event_id || '-'}</td>
+                                    <td>{assesi.id}</td>
+                                    <td><strong>{assesi.no_peserta || '-'}</strong></td>
+                                    <td>{assesi.nama_peserta || '-'}</td>
+                                    <td>{assesi.email || '-'}</td>
+                                    
+                                    <td align="center">{badgeApl1}</td>
+                                    <td align="center">{badgeKompetensi}</td>
+
+                                    <td>{assesi.skema_sertifikasi_id || '-'}</td>
+                                    <td>{assesi.assesor_id || '-'}</td>
+                                    <td>{assesi.user_id || '-'}</td>
+                                    <td>{assesi.no_blanko || '-'}</td>
+                                    <td>{assesi.no_sertifikat || '-'}</td>
+                                    <td>{assesi.no_registrasi || '-'}</td>
+                                    <td>{assesi.tanggal_berlaku ? new Date(assesi.tanggal_berlaku).toLocaleDateString('id-ID') : '-'}</td>
+                                    <td>{assesi.tanggal_expired ? new Date(assesi.tanggal_expired).toLocaleDateString('id-ID') : '-'}</td>
+                                  </tr>
+                                );
+                              })
                             )}
                           </tbody>
                         </table>
